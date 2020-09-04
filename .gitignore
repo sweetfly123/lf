@@ -17,6 +17,8 @@ target/
 *.iws
 *.iml
 *.ipr
+### front ###
+/web/node_modules/**
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,3 +32,4 @@ build/
 
 ### VS Code ###
 .vscode/
+
