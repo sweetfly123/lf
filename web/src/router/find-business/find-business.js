@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel, List, Card, Row, Col, Divider} from 'antd';
+import {Carousel, List, Card, Row, Col} from 'antd';
 import {businessData_1, businessData_2} from '../../data/business-data';
 
 const navStyle = {
