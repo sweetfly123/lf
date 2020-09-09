@@ -2,13 +2,11 @@ import React from 'react';
 import { Layout, Menu, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import {
-  Route,
   Link,
-  useLocation
+  useLocation,
+  Switch
 } from "react-router-dom";
-import { FindService } from './router/find-service/find-service';
-import { FindExperts } from './router/find-exports/find-experts';
-import { FindBusiness } from './router/find-business/find-business';
+import {routes, RouteWithSubRoutes} from './routes/routes';
 
 const { Header, Content, Footer } = Layout;
 const logo = {
@@ -28,9 +26,10 @@ function App() {
           theme="light"
           mode="horizontal"
           defaultSelectedKeys={[useLocation().pathname]}
+          selectedKeys={[useLocation().pathname]}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key="/home">
+          <Menu.Item key={"/home"}>
             <Link to="/home">找服务</Link>
           </Menu.Item>
           <Menu.Item key="/experts">
@@ -46,9 +45,13 @@ function App() {
       </Header>
       <Content style={{ padding: '0 50px', marginTop: '100px', height: 'fit-content' }}>
         <div style={{ background: '#fff', padding: 24, height: 'inherit' }}>
-          <Route path="/home" component={FindService} />
-          <Route path="/experts" component={FindExperts} />
-          <Route path="/business" component={FindBusiness} />
+          <Switch>
+            {
+              routes.map(route => (
+                <RouteWithSubRoutes key={route.key} {...route}/>
+              ))
+            }
+          </Switch>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Powered by React@16.13.1 and Ant Design@3.26.18</Footer>
