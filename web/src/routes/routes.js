@@ -1,6 +1,6 @@
 import React from 'react';
 import {FindService} from '../router/find-service/find-service';
-import {FindExperts} from '../router/find-exports/find-experts';
+import {FindExperts} from '../router/find-experts/find-experts';
 import {FindBusiness} from '../router/find-business/find-business';
 import {ServiceDetails} from '../router/find-service/service-details';
 
@@ -37,7 +37,7 @@ export function RouteWithSubRoutes(route){
     <Route
       path={route.path}
       render={props=>(
-        <route.component {...props} routes={route.routes}/>
+        <route.component key={route.key} {...props} routes={route.routes}/>
       )}
     >
     </Route>

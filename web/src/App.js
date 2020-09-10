@@ -6,7 +6,7 @@ import {
   useLocation,
   Switch
 } from "react-router-dom";
-import {routes, RouteWithSubRoutes} from './routes/routes';
+import { routes, RouteWithSubRoutes } from './routes/routes';
 
 const { Header, Content, Footer } = Layout;
 const logo = {
@@ -43,12 +43,12 @@ function App() {
           </Button>
         </Menu>
       </Header>
-      <Content style={{ padding: '0 50px', marginTop: '100px', height: 'fit-content' }}>
-        <div style={{ background: '#fff', padding: 24, height: 'inherit' }}>
+      <Content style={{ padding: '0 100px', marginTop: '100px', height: 'fit-content' }}>
+        <div style={{ background: '#fff', padding: 30, height: 'inherit' }}>
           <Switch>
             {
               routes.map(route => (
-                <RouteWithSubRoutes key={route.key} {...route}/>
+                <RouteWithSubRoutes key={route.key} {...route} />
               ))
             }
           </Switch>

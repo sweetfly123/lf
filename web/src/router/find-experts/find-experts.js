@@ -4,15 +4,15 @@ import { SearchComponent } from '../../components/search-component';
 import { List, Avatar, Tag, Space, Button } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 
-const categaries = [
-  { label: "专家类型", key: "expertTypes", value: expertTypes, moreBtn: true },
-  { label: "业务专长", key: "businessExpertise", value: businessExpertise, moreBtn: false },
-  { label: "项目专长", key: "projectExpertise", value: projectExpertise, moreBtn: false }
-]
+// const categaries = [
+//   { label: "专家类型", key: "expertTypes", value: expertTypes, moreBtn: true },
+//   { label: "业务专长", key: "businessExpertise", value: businessExpertise, moreBtn: false },
+//   { label: "项目专长", key: "projectExpertise", value: projectExpertise, moreBtn: false }
+// ]
 export function FindExperts() {
   return (
     <div>
-      <SearchComponent categaries={categaries} />
+      {/* <SearchComponent categaries={categaries} /> */}
       <List style={{ padding: '50px 50px', marginTop: '20px' }}
         bordered={true}
         itemLayout="vertical"
@@ -35,22 +35,22 @@ export function FindExperts() {
                   <Tag color='#108ee9' style={{ marginLeft: '10px' }}>{item.title}</Tag>
                 </>}
               description={
-                <>
+                <div>
                   <p>{item.description}</p>
                   <p>
-                    <Space>{React.createElement(AimOutlined)}{item.area}</Space>
+                    <AimOutlined/>{item.area}
                   </p>
                   <p>擅长领域：
                       {
                       item.tags.map(tag => (
-                        <Tag color='blue'>{tag}</Tag>
+                        <Tag color='blue' key={tag}>{tag}</Tag>
                       ))
                     }
                   </p>
                   <p>
                     <Tag color='orange'>服务咨询：¥ {item.fee}</Tag>
                   </p>
-                </>
+                </div>
               }
             />
           </List.Item>

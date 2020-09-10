@@ -19,7 +19,6 @@ import { RouteWithSubRoutes } from '../../routes/routes';
 export function FindService(props) {
   const { routes } = props;
   const location = useLocation();
-  // console.log(routes, location);
   return (
     <div>
       {/* <SearchComponent categaries={categaries}/> */}
