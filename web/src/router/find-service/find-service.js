@@ -38,7 +38,7 @@ export function FindService(props) {
                 <div>
                   <p>行业：{item.content.industry}</p>
                   <p>业务：{item.content.business}</p>
-                  <p>标签：{item.content.tags.map(tag => <Tag color="blue">{tag}</Tag>)}</p>
+                  <p>标签：{item.content.tags.map(tag => <Tag color="#0aa344">{tag}</Tag>)}</p>
                   <p>服务商：{item.content.service}</p>
                   <span style={{ width: '250px', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Space>{React.createElement(AimOutlined)}{item.footer.area}</Space>

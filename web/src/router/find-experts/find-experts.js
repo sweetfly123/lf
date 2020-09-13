@@ -32,7 +32,7 @@ export function FindExperts() {
               title={
                 <>
                   {item.name}
-                  <Tag color='#108ee9' style={{ marginLeft: '10px' }}>{item.title}</Tag>
+                  <Tag color='#0aa344' style={{ marginLeft: '10px' }}>{item.title}</Tag>
                 </>}
               description={
                 <div>
@@ -43,7 +43,7 @@ export function FindExperts() {
                   <p>擅长领域：
                       {
                       item.tags.map(tag => (
-                        <Tag color='blue' key={tag}>{tag}</Tag>
+                        <Tag color='#0aa344' key={tag}>{tag}</Tag>
                       ))
                     }
                   </p>
