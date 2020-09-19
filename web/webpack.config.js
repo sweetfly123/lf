@@ -1,11 +1,16 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 引入CleanWebpackPlugin插件
 
 module.exports = {
+  mode: "development",
   entry: path.join(__dirname, "src/index.js"),
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "bundle.js"
+    filename: "[name].js",
+    chunkFilename: '[name].js', // 设置按需加载后的chunk名字
+    publicPath: '/'
   },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
@@ -15,6 +20,7 @@ module.exports = {
     inline: true,
     open: true
   },
+  devtool: 'source-map', // 会生成对于调试的完整的.map文件，但同时也会减慢打包速度
   module: {
     rules: [
       {
@@ -68,6 +74,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.html")
-    })
+    }),
+    new CleanWebpackPlugin(),  // 默认删除output中path对应文件
+    new webpack.HotModuleReplacementPlugin() // 热更新插件
   ]
 }
