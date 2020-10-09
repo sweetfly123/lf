@@ -141,7 +141,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, MyUser> implements 
                 //如果redis里面已经存在该用户已经登录过了的信息
                 //我这边要刷新一遍token信息，不然，它会返回上一次还未过时的token信息给你
                 //不便于做单点维护
-                token = oauthRefreshToken(loginUserVO.getRefreshToken());
+                Object orefresh = oauthRefreshToken(loginUserVO.getRefreshToken());
+                JSONObject jsonObjectR = JSON.parseObject(JSON.toJSONString(orefresh));
+                token.setTokenType(jsonObjectR.getString("token_type"));
+                token.setValue(jsonObjectR.getString("access_token"));
+                refreshTokenBean = new RefreshTokenBean();
+                refreshTokenBean.setValue(jsonObjectR.getString("refresh_token"));
+                refreshTokenBean.setExpiration(jsonObjectR.getString("expires_in"));
+                token.setRefreshToken(refreshTokenBean);
+                token.setExpiresIn((Integer) jsonObjectR.get("expires_in"));
+                token.setScope(Arrays.asList(jsonObjectR.getString("scope")));
                 redisUtil.deleteCache(loginUserVO.getAccessToken());
             }
         } catch (RestClientException e) {
@@ -179,15 +188,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, MyUser> implements 
      * @author Zhifeng.Zeng
      */
     @Override
-    public Token oauthRefreshToken(String refreshToken) {
+    public Object oauthRefreshToken(String refreshToken) {
         MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("client_id", CLIENT_ID);
         paramMap.add("client_secret", CLIENT_SECRET);
         paramMap.add("refresh_token", refreshToken);
         paramMap.add("grant_type", GRANT_TYPE[1]);
-        Token token = null;
+        Object token = null;
         try {
-            token = restTemplate.postForObject(serverConfig.getUrl() + UrlEnum.LOGIN_URL.getUrl(), paramMap, Token.class);
+            token = restTemplate.postForObject(serverConfig.getUrl() + UrlEnum.LOGIN_URL.getUrl(), paramMap, Object.class);
         } catch (RestClientException e) {
             try {
                 //此处应该用自定义异常去返回，在这里我就不去具体实现了

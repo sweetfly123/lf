@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -21,7 +22,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
@@ -133,7 +136,6 @@ public class OAuth2Config {
             //token信息存到服务内存
             /*endpoints.tokenStore(new InMemoryTokenStore())
                     .authenticationManager(authenticationManager);*/
-
             //token信息存到redis
             endpoints.tokenStore(redisTokenStore()).authenticationManager(authenticationManager)
                     .userDetailsService(userDetailsService);
@@ -144,7 +146,7 @@ public class OAuth2Config {
             tokenService.setClientDetailsService(endpoints.getClientDetailsService());
             tokenService.setTokenEnhancer(endpoints.getTokenEnhancer());
             //1小时
-            tokenService.setAccessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1));
+            tokenService.setAccessTokenValiditySeconds((int) TimeUnit.SECONDS.toSeconds(30));
             //1小时
             tokenService.setRefreshTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1));
             tokenService.setReuseRefreshToken(false);

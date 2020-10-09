@@ -37,6 +37,11 @@ public class LFServiceImpl extends ServiceImpl<LFMapper, LFEntity> implements LF
         return records;
     }
 
+    @Override
+    public Boolean updateLFInfo(LFEntity entity) {
+        return this.updateById(entity);
+//        return this.save(entity);
+    }
 
     /**
      * 功能描述 返回数据总数
