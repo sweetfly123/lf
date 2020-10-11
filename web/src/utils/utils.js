@@ -2,7 +2,7 @@
  * 一些工具类函数
  */
 
-
+import React from 'react';
 //类型判断
 const checkType = {
   isNull: (val) => {
@@ -143,7 +143,7 @@ const compose = (...args) => {
 }
 
 //深拷贝
-DeepClone = (source, hash=new WeakMap()) => {
+const DeepClone = (source, hash=new WeakMap()) => {
   if(source === null) return null;
 
   //为了解决循环引用和相同引用的问题，存放已经递归到的目标对象
@@ -208,7 +208,7 @@ DeepClone = (source, hash=new WeakMap()) => {
 const HTMLDecode = (str) => {
   const article = document.createElement("article");
   article.innerHTML = str;
-  return article.textContent || article.innerText;
+  return <div dangerouslySetInnerHTML={{ __html: article.textContent || article.innerText}}/>;
 }
 
 export {

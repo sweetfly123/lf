@@ -9,7 +9,7 @@ export function TabsComponent(props) {
       {
         props.render.map(child => (
           <TabPane tab={child.tab} key={child.key}>
-            <child.component />
+            <child.component {...props}/>
           </TabPane>
         ))
       }

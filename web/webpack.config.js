@@ -18,7 +18,13 @@ module.exports = {
     hot: true,
     port: "3000",
     inline: true,
-    open: true
+    open: true,
+    proxy:{
+      "/auth/**": {
+        target: "http://121.36.38.15:8001/",
+        changeOrigin: true
+      }
+    }
   },
   devtool: 'source-map', // 会生成对于调试的完整的.map文件，但同时也会减慢打包速度
   module: {

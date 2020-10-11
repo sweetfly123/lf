@@ -1,0 +1,126 @@
+.user-head{
+  padding-top: 50px;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  background-image: url(../../../public/userbg.png);
+  background-repeat: no-repeat;
+  background-size: 860px 100px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  align-items: center;
+}
+
+.user-top{
+  display: flex;
+}
+
+.avatar-img {
+  overflow: hidden;
+  width: 85px;
+  height: 85px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.avatar-img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+img {
+  border: none;
+}
+
+.user-desc {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.desc-top {
+  display: flex;
+  align-items: center;
+}
+
+.desc-top h3 {
+  font-size: 20px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.desc-top p {
+  font-size: 16px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.desc-top span {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.desc-bottom {
+  margin-top: 15px;
+}
+
+.level {
+  font-size: 16px;
+  color: #333;
+  margin-right: 20px;
+  padding-right: 20px;
+  border-right: 1px solid #dddddd;
+}
+
+.power-label {
+  font-size: 18px;
+  color: #333;
+  margin-right: 3px;
+}
+
+.power-deg {
+  font-size: 18px;
+  color: #ff6700;
+}
+
+.user-introduce {
+  padding: 5px 20px 20px 20px;
+}
+
+.user-introduce p {
+  width: 20%;
+  display: inline-block;
+  color: #333333;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.position {
+  background-size: 8px;
+  padding-left: 15px;
+}
+
+.company {
+  background-size: 20px;
+  padding-left: 25px;
+}
+
+.address {
+  background-size: 10px;
+  padding-left: 15px;
+}
+
+.user-command {
+  display: flex;
+  padding: 0px 20px 20px 20px;
+  align-items: center;
+}
+
+.user-button {
+  width: 49%;
+}

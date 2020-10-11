@@ -1,13 +1,13 @@
-import React from 'react';
-import { Layout, Menu, Button } from 'antd';
+import React, {useEffect} from 'react';
+import { Layout, Menu, Button, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import {
   Link,
   useLocation,
-  Switch
+  Switch,useHistory
 } from "react-router-dom";
 import { routes, RouteWithSubRoutes } from './routes/routes';
-
+import {login} from './router/find-service/request';
 const { Header, Content, Footer } = Layout;
 const logo = {
   width: "120px",
@@ -17,7 +17,20 @@ const logo = {
   float: "left"
 }
 
+
+
 function App() {
+  // useEffect(() => {
+  //   login({username:'admin',password:'123'}).then(res => {
+  //     console.log(res);
+  //     sessionStorage.setItem('tokenId', res.data.data.accessToken)
+  //   }).catch(error => message.error(error, 2.0));
+  // }, sessionStorage.getItem("tokenId"))
+
+  const history = useHistory();
+  const toNavigate=(path)=>{
+    history.push(path)
+  }
   return (
     <Layout>
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%', background: '#fff' }}>
@@ -29,14 +42,14 @@ function App() {
           selectedKeys={[useLocation().pathname]}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key={"/home"}>
-            <Link to="/home">找服务</Link>
+          <Menu.Item key={"/service"} onClick={() => toNavigate("/service")}>
+            找服务
           </Menu.Item>
-          <Menu.Item key="/experts">
-            <Link to="/experts">找专家</Link>
+          <Menu.Item key="/experts" onClick={() => toNavigate("/experts")}>
+            找专家
           </Menu.Item>
-          <Menu.Item key="/business">
-            <Link to="/business">招商</Link>
+          <Menu.Item key="/business" onClick={() => toNavigate("/business")}>
+            招商
           </Menu.Item>
           <Button shape="circle" style={{ float: "right", marginTop: "18px", marginRight: "120px" }}>
             <UserOutlined />
@@ -44,7 +57,7 @@ function App() {
         </Menu>
       </Header>
       <Content style={{ padding: '0 100px', marginTop: '100px', height: 'fit-content' }}>
-        <div style={{ background: '#fff', padding: 30, height: 'inherit' }}>
+        <div style={{ background: '#fff', padding: '65px', height: 'inherit' }}>
           <Switch>
             {
               routes.map(route => (

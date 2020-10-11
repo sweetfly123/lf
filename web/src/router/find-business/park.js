@@ -1,10 +1,13 @@
 import React from 'react';
 import { Card, Row, Col, List } from 'antd';
-import { businessData_1, businessData_2 } from '../../data/business-data';
+import { Link } from 'react-router-dom';
 
-export function ParkService() {
+export function ParkService(props) {
+  const {data} = props;
+  const left_data = data.concat().splice(0,5);
+  const right_data = data.concat().splice(5, data.length-1);
   return (
-    <Card id="park" extra={<a href="javascript:void(0)">更多</a>}>
+    <Card id="park">
       <div>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col span={5}>
@@ -43,30 +46,42 @@ export function ParkService() {
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               <Col span={9}>
                 <List
-                  dataSource={businessData_1}
-                  renderItem={item => (
-                    <List.Item
-                      actions={[
-                        <p>{item.area}</p>
-                      ]}
-                    >
-                      <a style={{ color: 'black' }}>{item.title}</a>
-                    </List.Item>
-                  )}
+                  dataSource={left_data}
+                  renderItem={item => {
+                    const path = {
+                      pathname: `/business/details?id=${item.id}`,
+                      state: item
+                    }
+                    return (
+                      <List.Item
+                        actions={[
+                          <p>{item.province}</p>
+                        ]}
+                      >
+                        <Link style={{ color: 'black' }} to={path}>{item.name}</Link>
+                      </List.Item>
+                    )
+                  }}
                 />
               </Col>
               <Col span={9} style={{ marginLeft: '70px' }}>
                 <List
-                  dataSource={businessData_2}
-                  renderItem={item => (
-                    <List.Item
-                      actions={[
-                        <p>{item.area}</p>
-                      ]}
-                    >
-                      <a style={{ color: 'black' }}>{item.title}</a>
-                    </List.Item>
-                  )}
+                  dataSource={right_data}
+                  renderItem={item => {
+                    const path = {
+                      pathname: `/business/details?id=${item.id}`,
+                      state: item
+                    }
+                    return (
+                      <List.Item
+                        actions={[
+                          <p>{item.province}</p>
+                        ]}
+                      >
+                        <Link style={{ color: 'black' }} to={path}>{item.name}</Link>
+                      </List.Item>
+                    )
+                  }}
                 />
               </Col>
             </Row>
