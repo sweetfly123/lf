@@ -1,12 +1,10 @@
 package com.qy.wenlv.service;
 
 
-import com.qy.wenlv.domain.Token;
 import com.qy.wenlv.dto.LoginUserDTO;
 import com.qy.wenlv.dto.UserDTO;
 import com.qy.wenlv.security.MyUser;
 import com.qy.wenlv.vo.ResponseVO;
-import com.qy.wenlv.vo.UserVO;
 
 import java.util.List;
 
@@ -47,5 +45,5 @@ public interface UserService {
      */
     ResponseVO login(LoginUserDTO loginUserDTO);
 
-    Token oauthRefreshToken(String refreshToken);
+    Object oauthRefreshToken(String refreshToken);
 }

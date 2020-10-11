@@ -9,6 +9,10 @@ import com.qy.wenlv.security.MyUser;
 import com.qy.wenlv.service.UserService;
 import com.qy.wenlv.utils.AssertUtils;
 import com.qy.wenlv.vo.ResponseVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -28,6 +32,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/auth/")
+@Api("用户")
 public class AuthController {
 
     @Autowired
@@ -86,6 +91,15 @@ public class AuthController {
      * @return
      * @description 用户登录
      */
+    @ApiOperation("登录-获取token")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(paramType = "query", dataType = "String",
+                            name = "username", value = "用户名", required = true),
+                    @ApiImplicitParam(paramType = "query", dataType = "String",
+                            name = "password", value = "密码", required = true)
+            }
+    )
     @PostMapping("user/login")
     public ResponseVO login(LoginUserDTO loginUserDTO) {
         return userService.login(loginUserDTO);
@@ -110,7 +124,7 @@ public class AuthController {
      */
     @GetMapping("user/refresh/{refreshToken}")
     public ResponseVO refresh(@PathVariable(value = "refreshToken") String refreshToken) {
-        Token token = userService.oauthRefreshToken(refreshToken);
+        Object token = userService.oauthRefreshToken(refreshToken);
         return ResponseVO.success(token);
     }
 

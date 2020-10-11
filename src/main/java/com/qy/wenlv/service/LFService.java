@@ -8,5 +8,7 @@ import java.util.List;
 public interface LFService extends IService<LFEntity> {
     List<LFEntity> getLFInfo(Integer currentPage, Integer pageSize);
 
+    Boolean updateLFInfo(LFEntity entity);
+
     public Integer getLFCount();
 }
