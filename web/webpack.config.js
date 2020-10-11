@@ -8,9 +8,9 @@ module.exports = {
   entry: path.join(__dirname, "src/index.js"),
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "[name].js",
-    chunkFilename: '[name].js', // 设置按需加载后的chunk名字
-    publicPath: '/'
+    filename: "main.js",
+    //chunkFilename: '[name].js', // 设置按需加载后的chunk名字
+    publicPath: './'
   },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
